@@ -25,11 +25,11 @@ class EditorJsContainer extends React.PureComponent<Props> {
     Math.floor(Math.random() * 1000) + Date.now()
   ).toString(36)}`
 
-  componentDidMount() {
-    this.initEditor()
-  }
-
   async componentDidUpdate({ readOnly: prevReadOnly }: Props) {
+    if (!this.instance) {
+        this.initEditor()
+    }
+
     const { enableReInitialize, data, readOnly } = this.props
     if (prevReadOnly !== readOnly) {
       // Toggle readOnly mode
